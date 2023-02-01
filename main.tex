@@ -1,0 +1,132 @@
+\documentclass[oneside]{book}%加oneside可以去掉空白页
+\usepackage[UTF8]{ctex}
+\usepackage[scale=0.8,bottom=2cm,a4paper]{geometry}%设置页面大小
+\usepackage{fancyhdr}%定义页眉页脚
+\usepackage{listings}%代码块
+%\usepackage{xeCJK}
+\usepackage{graphicx}%显示图片
+\usepackage{xcolor}%搭配代码块，实现高亮
+\usepackage{pdfpages}%用来导入PDF页面
+\title{LaTex HandBook}
+\author{Michael Jetson}
+\date{January 2023}
+\pagestyle{headings}
+\begin{document}
+
+\lstset{numbers=left, %设置行号位置
+        numberstyle=\tiny, %设置行号大小
+        keywordstyle=\color{blue}, %设置关键字颜色
+        commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+        frame=single, %设置边框格式
+        escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+        %breaklines, %自动折行
+        extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+        xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+        tabsize=4, %设置tab空格数
+        showspaces=false %不显示空格
+       }
+
+\maketitle%生成标题
+\tableofcontents%生成目录
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}%将正文第一页作为页码起始的地方
+\part{LaTeX基础}
+
+%设置页码计数
+\newpage
+\chapter{LaTeX基础}
+\section{LaTeX的历史}
+大家对排版这个词应该不陌生，除去小时候耳熟能详的活字印刷，大家现在应该都搞过论文排版，不论是结课论文或者是其他论文，而且相信大家都用过Word排版，不管是微软的Word还是金山的WPS，大家都对Word排版不陌生，入门容易，而且功能很不错，但是大家会发现那些排版非常精美的论文版面以及复杂的数学公式，Word难以制作出来，这是因为这些排版使用了更为强大的排版工具——LaTeX。
+
+不过，我无意于给大家详细介绍LaTeX的历史，所以对LaTeX历史感兴趣的同学可以自行百度或者维基百科，在这里我们只会简单介绍LaTeX的用途以及相比于其他排版系统（如Word）的优势。
+
+LaTeX（音译“拉泰赫”）是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天、甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。这个系统同样适用于生成从简单的信件到完整书籍的所有其他种类的文档。
+\section{用LaTeX书写你的第一篇文章}
+我们打开overleaf网站，新建一个项目，然后就可以看到项目里面自动生成了一个名为main.tex的文件，写过编程语言的同学应该会联想到主函数，与这个有异曲同工之妙，当然没学过编程语言的同学也无需担心，可以理解为所有的功能都在这个里面实现即可。
+
+文件中内容如下
+\begin{lstlisting}[language=TeX]
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\title{demo}
+\author{your name}
+\date{January 2023}
+\begin{document}
+\maketitle
+\section{Introduction}
+\end{document}
+\end{lstlisting}
+
+然后点击右上角的Recompile进行编译，就可以看到右边出现了一个PDF文档界面
+
+
+
+接下来我们就开始逐行解析代码：
+\begin{lstlisting}[language=TeX]
+\documentclass{article}
+%这是声明文件的文档类型为article（文章类型），百分号%代表注释
+
+\usepackage[utf8]{inputenc}
+%字体编码,用来嵌入字体
+
+\title{demo}
+%文章标题为“demo”
+
+\author{your name}
+%作者名字
+
+\date{January 2023}
+%日期
+
+\begin{document}
+%代表文档主体部分的开始，用LaTeX的术语来说就是开启了一个新的环境
+
+\maketitle
+%生成标题，使标题可以显示
+
+\section{Introduction}
+%开始一个章节，章节名为Introduction
+
+\end{document}
+%声明文档主体部分的结束
+\end{lstlisting}
+
+然后你可以在环境里面加入你自己的文字，或者更改文章标题和章节名，编译后就可以生成一篇真正的文章了，虽然这个文章很简单，但是不要急，我们会继续学习如何让文章更加精美。
+\section{让文章内容更丰富}
+我们想要往文章里面添加各种东西，让文章更丰富，那应该如何完成呢？用过Word的同学都知道，除了正文，还有各种级别的标题啊、列表啊什么的，所以我们在这一节将高速大家如何实现分级标题和列表。
+
+我们将main.tex的内容修改为以下代码：
+\newpage
+\begin{lstlisting}
+\documentclass{article}
+%这是声明文件的文档类型为article（文章类型）
+\usepackage[utf8]{ctex}
+%使用ctex宏包以及UTF8编码，可以支持中文，否则中文内容无法显示
+\title{demo}
+%文章标题为“demo”
+\author{your name}
+%作者名字
+\date{January 2023}
+%日期
+\begin{document}
+%代表文档主体部分的开始，用LaTeX的术语来说就是开启了一个新的环境
+\maketitle
+%生成标题，使标题可以显示
+\section{Introduction}
+%开始一个章节，章节名为Introduction，可理解为一级标题
+\subsection{Introduction}
+%可理解为二级标题
+\subsubsection{Introduction}
+%可理解为二级标题
+\begin{itemize}
+%开启一个无序列表环境，每一个\item后空格（可以一个也可以多个，不影响）
+%，加上文本就可以生成无序列表
+    \item 第一个项目
+    \item 第二个项目
+\end{itemize}
+\end{document}
+%声明文档主体部分的结束
+\end{lstlisting}
+
+\end{document}
