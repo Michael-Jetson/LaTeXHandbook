@@ -7,15 +7,16 @@
 \usepackage{graphicx}%显示图片
 \usepackage{xcolor}%搭配代码块，实现高亮
 \usepackage{pdfpages}%用来导入PDF页面
+\usepackage{enumerate}
 \title{LaTex HandBook}
-\author{Michael Jetson}
-\date{January 2023}
+\author{Michael Jetson\\NCEPU}
+%\date{January 2023}
 \pagestyle{headings}
 \begin{document}
 
 \lstset{numbers=left, %设置行号位置
         numberstyle=\tiny, %设置行号大小
-        keywordstyle=\color{blue}, %设置关键字颜色
+        keywordstyle=\color{yellow}, %设置关键字颜色
         commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
         frame=single, %设置边框格式
         escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
@@ -93,12 +94,12 @@ LaTeX（音译“拉泰赫”）是一种基于ΤΕΧ的排版系统，由美国
 \end{lstlisting}
 
 然后你可以在环境里面加入你自己的文字，或者更改文章标题和章节名，编译后就可以生成一篇真正的文章了，虽然这个文章很简单，但是不要急，我们会继续学习如何让文章更加精美。
-\section{让文章内容更丰富}
+\section{让文章内容更丰富——使用列表}
 我们想要往文章里面添加各种东西，让文章更丰富，那应该如何完成呢？用过Word的同学都知道，除了正文，还有各种级别的标题啊、列表啊什么的，所以我们在这一节将高速大家如何实现分级标题和列表。
 
 我们将main.tex的内容修改为以下代码：
 \newpage
-\begin{lstlisting}
+\begin{lstlisting}[language=TeX]
 \documentclass{article}
 %这是声明文件的文档类型为article（文章类型）
 \usepackage[utf8]{ctex}
@@ -128,5 +129,11 @@ LaTeX（音译“拉泰赫”）是一种基于ΤΕΧ的排版系统，由美国
 \end{document}
 %声明文档主体部分的结束
 \end{lstlisting}
-
+接下来我们就会发现，文章中出现了一个无序的列表
+\begin{itemize}
+	\item  这是第一项
+	\item  这是第二项
+\end{itemize}
+\part{LaTeX进阶}
+\input{cmd}
 \end{document}
